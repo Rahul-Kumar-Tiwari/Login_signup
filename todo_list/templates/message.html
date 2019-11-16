@@ -1,0 +1,32 @@
+{% extends 'home.html' %}
+
+<html>
+<head>
+
+</head>
+<body>
+<h1>Welcome To the To Do App</h1>
+<p>Hey dear user hope your pending task in To Do list is:</p>
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert alert_warning alert-dismissable" role="alert">
+                <button class="close" data-dismis="alert">
+                    <small><sup>x</sup></small>
+                </button>
+                 {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if all_items %}
+<table>
+      {% for things in all_items %}
+            {% if things.completed %}
+                <tr class="table-secondary">
+                    <td class="striker"><center>>{{ things.item }}</center> </td>
+                </tr>
+              {% endif %}
+        {% endfor %}
+</table>
+</body>
+</html>

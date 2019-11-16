@@ -1,0 +1,153 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pytholabs Assignment</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+</head>
+<body>
+	<div id="clock"></div>
+	<svg id="first" viewBox="0 0 960 300">
+	<symbol id="v-text">
+		<text text-anchor="middle" x="50%" y="80%"> Welcome </text>
+	</symbol>
+
+	<g class = "g-ants">
+		<use xlink:href="#v-text" class="text-copy"></use>
+		<use xlink:href="#v-text" class="text-copy"></use>
+		<use xlink:href="#v-text" class="text-copy"></use>
+		<use xlink:href="#v-text" class="text-copy"></use>
+		<use xlink:href="#v-text" class="text-copy"></use>
+	</g>
+</svg>
+	<svg id="second" viewBox="0 0 1000 300">
+	<symbol id="s-text">
+		<text text-anchor="middle" x="50%" y="80%"> Pytholabs</text>
+	</symbol>
+
+	<g class = "g-ants">
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+	</g>
+</svg>
+	<script type="text/javascript">
+     	   setInterval(displayclock, 500);
+     		function displayclock () {
+     			var time = new  Date();
+     			var hrs = time.getHours();
+     			var min =time.getMinutes();
+     			var sec =time.getSeconds();
+     			var en = 'AM';
+
+     			if (hrs > 12){
+     				en = 'PM';
+     			}
+
+     				if (hrs >12) {
+     					hrs = hrs - 12;
+
+     				}
+     				if (hrs == 0) {
+     					hrs = 12;
+					}
+ 					if (hrs < 10) {
+ 						hrs = '0' + hrs;
+ 					}
+ 					if (min < 10) {
+ 						min = '0' + min;
+ 					}
+ 					if (sec < 10) {
+ 						sec = '0' + sec;
+ 					}
+					document.getElementById('clock').innerHTML = hrs + ':' + min + ':' +sec  + ' '+en;
+				}
+
+     </script>
+
+<button onclick="login()" style="width:200px; margin-top:70px; margin-left:560px;">
+Let's get Started</button>
+
+
+<div id="modal-wrapper_login" class="modal">
+
+  <div class="modal-content animate">
+
+    <div class="imgcontainer">
+      <span onclick= "cut()" class="close" title="Close PopUp">&times;</span>
+      <img src="{% static 'images/1.png' %}" class="avatar">
+
+    </div>
+	  <div class="container">
+    <div id="abc">
+		<h1 style="text-align:center">Login</h1>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="Email id" name="username">
+      	    <input type="password" placeholder="Password" name="password">
+      	    <input id="login" type="submit" value="Login">
+         </form>
+		<button onclick="xyzz()">Create new Account</button>
+      	<a href="#" style="text-decoration:none; float:left; margin-left:34px; margin-top:16px;">Forgot Password ?</a><br><br>
+    </div>
+	  <div id="xyz">
+		  <h1 style="text-align:center">Signup</h1>
+           <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+		  <input type="text" placeholder="Enter Your Name" name="name">
+		  <input type="text" placeholder="Enter Your Email id" name="username">
+		  <input type="text" placeholder="Enter Your Mobile No" name="mobile">
+      	  <input type="password" placeholder="Enter Password" name="password">
+		  <input type="password" placeholder="Confirm Password" name="confirm_password">
+		  <input id="signup" type="submit">
+           </form>
+		</div>
+	  </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-wrapper_login');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        flag.style.display="block";
+        flag1.style.display="none";
+
+    }
+}
+var flag1 = document.getElementById("xyz");
+var flag = document.getElementById("abc");
+function xyzz(){
+		if(flag.style.display=="block"){
+			flag.style.display="none";
+			flag1.style.display="block";
+			}
+		else{
+			flag.style.display="block";
+
+		}
+
+		}
+function login(){
+	document.getElementById('modal-wrapper_login').style.display="block";
+	flag.style.display=="block";
+
+}
+function cut(){
+		document.getElementById('modal-wrapper_login').style.display="none";
+		flag.style.display="block";
+        flag1.style.display="none";
+
+}
+
+</script>
+</body>
+</html>
